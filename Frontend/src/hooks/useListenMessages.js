@@ -7,9 +7,11 @@ import notificationSound from "../assets/sounds/notification.mp3";
 
 const useListenMessages = () => {
 	const { socket } = useSocketContext();
-	const { messages, setMessages } = useConversation();
+	const { messages, setMessages ,selectedConversation} = useConversation();
 
 	useEffect(() => {
+		if (selectedConversation?._id) {
+			// console.log(selectedConversation)
 		socket?.on("newMessage", (newMessage) => {
 			newMessage.shouldShake = true;
 			const sound = new Audio(notificationSound);
@@ -18,6 +20,7 @@ const useListenMessages = () => {
 		});
 
 		return () => socket?.off("newMessage");
+	}
 	}, [socket, setMessages, messages]);
 };
 export default useListenMessages;

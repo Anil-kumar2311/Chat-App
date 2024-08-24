@@ -7,22 +7,34 @@ import toast from "react-hot-toast";
 const SearchInput = () => {
 
 	const [search, setSearch] = useState("");
-	const { setSelectedConversation } = useConversation();
+	// const { setSelectedConversation } = useConversation();
 	const { conversations } = useGetConversations();
+	const { setSearchResults } = useConversation();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (!search) return;
-		if (search.length < 3) {
-			return toast.error("Search term must be at least 3 characters long");
-		}
+		// if (search.length < 3) {
+		// 	return toast.error("Search term must be at least 3 characters long");
+		// }
 
-		const conversation = conversations.find((c) => c.fullName.toLowerCase().includes(search.toLowerCase()));
+		// const conversation = conversations.find((c) => c.fullName.toLowerCase().includes(search.toLowerCase()));
 
-		if (conversation) {
-			setSelectedConversation(conversation);
+		// if (conversation) {
+		// 	setSelectedConversation(conversation);
+		// 	setSearch("");
+		// } else toast.error("No such user found!");
+		
+		const matchedConversations = conversations.filter((c) =>
+			c.fullName.toLowerCase().includes(search.toLowerCase())
+		  );
+	//   console.log(matchedConversations)
+		  if (matchedConversations.length > 0) {
+			setSearchResults(matchedConversations);
 			setSearch("");
-		} else toast.error("No such user found!");
+		  } else {
+			toast.error("No such user found!");
+		  }
 	};
 	return (
 		<form onSubmit={handleSubmit} className='flex items-center gap-2'>

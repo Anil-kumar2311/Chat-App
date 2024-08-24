@@ -1,0 +1,30 @@
+body.light {
+    background-color: white;
+    color: black;
+  }
+  
+  body.dark {
+    background-color: #181818;
+    color: white;
+  }
+  
+  /* Ensure components adapt to the theme */
+  .component-light-theme {
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  .component-dark-theme {
+    background-color: #333;
+    color: #f9f9f9;
+  }
+  
+  /* Additional classes for other components */
+  .bg-light {
+    background-color: white;
+  }
+  
+  .bg-dark {
+    background-color: #1f2937; /* Tailwind's gray-800 */
+  }
+  

@@ -22,7 +22,15 @@ const SignUp = () => {
 
   const handleSubmit = async (e) =>{
     e.preventDefault();
-    await signup(inputs)
+
+    const capitalizedFullName = inputs.fullName.charAt(0).toUpperCase() + inputs.fullName.slice(1);
+
+    // Update the inputs with the capitalized fullName
+    const updatedInputs = { ...inputs, fullName: capitalizedFullName };
+
+    // Submit the updated inputs
+    await signup(updatedInputs);
+
   }
 
   return (
@@ -49,13 +57,13 @@ const SignUp = () => {
             <label className='label p-2'>
               <span className='text-base lable-text'>Password</span>
             </label>
-            <input type='text' placeholder='Enter Password' className='w-full input input-bordered h-10' value={inputs.password} onChange={(e) => setInputs({...inputs,password:e.target.value})}/>
+            <input type='Password' placeholder='Enter Password' className='w-full input input-bordered h-10' value={inputs.password} onChange={(e) => setInputs({...inputs,password:e.target.value})}/>
           </div>
           <div>
             <label className='label p-2'>
               <span className='text-base lable-text'>Confirm Password</span>
             </label>
-            <input type='text' placeholder='Confirm Password' className='w-full input input-bordered h-10' value={inputs.confirmpassword} onChange={(e) => setInputs({...inputs,confirmpassword:e.target.value})}/>
+            <input type='Password' placeholder='Confirm Password' className='w-full input input-bordered h-10' value={inputs.confirmpassword} onChange={(e) => setInputs({...inputs,confirmpassword:e.target.value})}/>
           </div>
           <GenderCheckbox onCheckboxChange = {handleCheckboxChange} selectedGender={inputs.gender} />
           <Link to='/login' className='text-sm hover:underline hover:text-blue-600 mt-2 inline-block'>Already have an account?</Link>

@@ -82,3 +82,21 @@ export const logout = (req,res) => {
         return res.status(500).json({error:"Internal server error"})
     }
 }
+
+export const update = async (req,res) => {
+    const { fullName, password, profilePic } = req.body;
+    const userId = req.user.id;
+  
+    try {
+      // Update the user's profile in the database
+      const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        { fullName, password, profilePic },
+        { new: true } // Return the updated document
+      );
+  
+      res.status(200).json(updatedUser);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update profile", error });
+    }
+}
